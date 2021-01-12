@@ -1,6 +1,13 @@
 <template>
-  <div class="wrap-vknob">
-    <label for="range-vknob">{{ lable }}</label>
+  <div class="vknob">
+    <div class="vknob__wrap" :style="{backgroundImage:`url(${imgURL.knobSplitterUrl})`}">
+      <div class="vknob__control" 
+        :style="{ backgroundImage:`url(${imgURL.knobControlUrl})`, transform: `rotate(${knobValue}deg)` }">
+
+      </div>
+    </div>
+    <div class="vknob__lable">{{ lable }}</div>
+   
     <b-form-input
       id="range-vknob"
       v-model="knobValue"
@@ -11,8 +18,6 @@
       step="step"    
     >
     </b-form-input>
-    <img :src="imgURL.knobSplitterUrl" alt="splitter">
-    <img :src="imgURL.knobControlUrl" alt="control">
   </div>
 </template>
 
@@ -96,7 +101,8 @@ export default {
   - Передаём текущее значение на сервер
   - Получаем текущее значение 
   - поварачиваем изображение регулятора в зависимости от knobValue
-  
+  - Кликаем по регулятору vknob__control, запускается обработчик на событие mousedown: 
+    - тянем вверх/вниз, отслеживаем координаты Y, если больше нуля, увеличиваем knobValue на шаг step, если уменьшается, уменьшаем
    */
 </style>
  
